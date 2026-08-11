@@ -14,8 +14,15 @@
 
         & [role="entry-name"],
         & [role="entry-date"],
+        & [role="entry-big-number"],
         & [role="subject-name"] {
             z-index: 2;
+        }
+
+        & [role="entry-big-number"] {
+            font-size: 3em;
+            font-weight: bold;
+            font-family: var(--heading-font);
         }
 
         & [role="clock"] {

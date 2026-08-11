@@ -136,10 +136,18 @@ class Occurence extends Model implements ContractsAuditable
 
     ];
 
-    public function rotation(): Attribute
+    public function bigNumber(): Attribute
     {
         $diff_in_years = $this->date->floatDiffInYears(now());
 
+        return Attribute::make(
+            get: fn () => floor($diff_in_years),
+        );
+    }
+
+    public function rotation(): Attribute
+    {
+        $diff_in_years = $this->date->floatDiffInYears(now());
 
         return Attribute::make(
             get: fn () => ($diff_in_years - floor($diff_in_years)) * 360,
