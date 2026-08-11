@@ -7,6 +7,7 @@
     @foreach(Auth::user()->subjects as $subject)
     <x-shipyard::app.section
         :title="$subject->name"
+        :subtitle="$subject->description"
         :icon="$subject->icon"
         :extended="true"
         style="border-color: {{ $subject->color }};"
