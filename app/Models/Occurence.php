@@ -78,7 +78,7 @@ class Occurence extends Model implements ContractsAuditable
     #region fields
     public const FIELDS = [
         "date" => [
-            "type" => "datetime-local",
+            "type" => "date",
             "label" => "Data wystąpienia",
             "icon" => "calendar",
         ],
@@ -128,7 +128,7 @@ class Occurence extends Model implements ContractsAuditable
     protected function casts(): array
     {
         return [
-            "date" => "datetime",
+            "date" => "date",
         ];
     }
 
