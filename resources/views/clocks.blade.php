@@ -11,7 +11,7 @@
         :icon="$subject->icon"
         :extended="true"
         style="border-color: {{ $subject->color }};"
-        inner-class="stagger-contents"
+        inner-class="flex right stagger-contents"
     >
         @foreach ($subject->entries as $entry)
             <x-entry.clock :entry="$entry" />
