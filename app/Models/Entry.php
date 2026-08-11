@@ -113,7 +113,7 @@ class Entry extends Model implements ContractsAuditable
 
     public function occurences()
     {
-        return $this->hasMany(Occurence::class);
+        return $this->hasMany(Occurence::class)->orderBy("date");
     }
     #endregion
 

@@ -8,4 +8,10 @@ class User extends ShipyardUser
 {
     public const FROM_SHIPYARD = true;
 
+    #region relations
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class, "created_by");
+    }
+    #endregion
 }

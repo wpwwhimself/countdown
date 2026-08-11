@@ -135,6 +135,16 @@ class Occurence extends Model implements ContractsAuditable
     protected $appends = [
 
     ];
+
+    public function rotation(): Attribute
+    {
+        $diff_in_years = $this->date->floatDiffInYears(now());
+
+
+        return Attribute::make(
+            get: fn () => ($diff_in_years - floor($diff_in_years)) * 360,
+        );
+    }
     #endregion
 
     #region on-saves

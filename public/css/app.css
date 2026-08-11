@@ -1,0 +1,31 @@
+.entry-clock {
+    --size: 10em;
+
+    width: var(--size);
+    height: var(--size);
+    padding: 0.5em;
+    border-radius: 100%;
+
+    & .contents {
+        height: 100%;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+
+        & [role="entry-name"],
+        & [role="entry-date"],
+        & [role="subject-name"] {
+            z-index: 2;
+        }
+
+        & [role="clock"] {
+            position: absolute;
+            z-index: 1;
+
+            & .clock-hand {
+                transform-origin: center center;
+                fill: var(--secondary);
+            }
+        }
+    }
+}
