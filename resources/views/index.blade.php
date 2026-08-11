@@ -5,6 +5,8 @@
 <x-shipyard::app.section
     title="Witaj w KTB!"
     icon="hand-wave"
+    class="stagger"
+    inner-class="stagger-contents"
 >
     <p>
         W tej aplikacji możesz uporządkować i śledzić <strong class="accent primary">wystąpienia ważnych dla Ciebie wydarzeń</strong>, np.:
