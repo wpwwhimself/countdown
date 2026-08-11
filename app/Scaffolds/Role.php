@@ -9,11 +9,11 @@ class Role extends ShipyardRole
     protected static function items(): array
     {
         return [
-            // [
-            //     "name" => "",
-            //     "icon" => "",
-            //     "description" => "",
-            // ],
+            [
+                "name" => "entry-manager",
+                "icon" => "tag-edit",
+                "description" => "Zarządza własnymi wpisami i ich tematami",
+            ],
         ];
     }
 }
