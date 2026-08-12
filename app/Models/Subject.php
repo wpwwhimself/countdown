@@ -24,6 +24,7 @@ class Subject extends Model implements ContractsAuditable
         "role" => "entry-manager",
         "checkOwnerUnless" => "technical",
         "ordering" => 1,
+        "defaultSort" => "name",
     ];
 
     use HasStandardFields, HasStandardScopes, HasStandardAttributes;
@@ -50,6 +51,7 @@ class Subject extends Model implements ContractsAuditable
                 "icon" => $this->icon ?? self::META["icon"],
                 "attributes" => new ComponentAttributeBag([
                     "role" => "card-title",
+                    "style" => "color: {$this->color};",
                 ]),
                 "slot" => $this,
             ])->render(),
@@ -68,9 +70,10 @@ class Subject extends Model implements ContractsAuditable
     public function displayMiddlePart(): Attribute
     {
         return Attribute::make(
-            get: fn () => view("shipyard::components.app.model.connections-preview", [
-                "connections" => self::getConnections(),
-                "model" => $this,
+            get: fn () => view("shipyard::components.app.icon-label-value", [
+                "icon" => model_icon("entries"),
+                "label" => "Liczba wpisów",
+                "slot" => $this->entries()->count(),
             ])->render(),
         );
     }
@@ -128,6 +131,13 @@ class Subject extends Model implements ContractsAuditable
     #endregion
 
     #region sorts and filters
+    const SORTS = [
+        "name" => [
+            "label" => "Nazwa",
+            "compare-using" => "field",
+            "discr" => "name",
+        ],
+    ];
     #endregion
 
     #region attributes and helpers

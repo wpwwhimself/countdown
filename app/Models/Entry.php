@@ -32,7 +32,12 @@ class Entry extends Model implements ContractsAuditable
     #region presentation
     public function __toString(): string
     {
-        return implode(" / ", [$this->subject, $this->name]);
+        return implode(" ", [
+            "<span style='color: {$this->subject->color};'>"
+                . view("shipyard::components.app.icon", ["name" => $this->subject->icon])->render()
+            . "</span>",
+            implode(" / ", [$this->subject, $this->name]),
+        ]);
     }
 
     public function optionLabel(): Attribute
@@ -51,7 +56,7 @@ class Entry extends Model implements ContractsAuditable
                 "attributes" => new ComponentAttributeBag([
                     "role" => "card-title",
                 ]),
-                "slot" => $this,
+                "slot" => $this->name,
             ])->render(),
         );
     }
@@ -59,18 +64,26 @@ class Entry extends Model implements ContractsAuditable
     public function displaySubtitle(): Attribute
     {
         return Attribute::make(
-            get: fn () => view("shipyard::components.app.model.badges", [
-                "badges" => $this->badges,
-            ])->render(),
+            get: fn () => $this,
         );
     }
 
     public function displayMiddlePart(): Attribute
     {
         return Attribute::make(
-            get: fn () => view("shipyard::components.app.model.connections-preview", [
-                "connections" => self::getConnections(),
-                "model" => $this,
+            get: fn () => view("shipyard::components.app.values-preview", [
+                "data" => [
+                    [
+                        "icon" => model_icon("occurences"),
+                        "label" => "Liczba wystąpień",
+                        "value" => $this->occurences()->count(),
+                    ],
+                    [
+                        "icon" => "calendar-end",
+                        "label" => "Najnowsze wystąpienie",
+                        "value" => $this->occurences->last()?->date->diffForHumans(),
+                    ],
+                ],
             ])->render(),
         );
     }
@@ -128,6 +141,23 @@ class Entry extends Model implements ContractsAuditable
     #endregion
 
     #region sorts and filters
+    const FILTERS = [
+        "subject" => [
+            "label" => "Temat",
+            "compare-using" => "field",
+            "discr" => "subject_id",
+            "type" => "select",
+            "operator" => "=",
+            "icon" => Subject::META["icon"],
+            "selectData" => [
+                "optionsFromScope" => [
+                    Subject::class,
+                    "forConnection",
+                ],
+                "emptyOption" => "wszystkie",
+            ],
+        ],
+    ];
     #endregion
 
     #region attributes and helpers

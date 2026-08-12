@@ -3,7 +3,7 @@
 
     width: var(--size);
     height: var(--size);
-    padding: 0.5em;
+    padding: 3px;
     border-radius: 100%;
 
     & .contents {
@@ -28,6 +28,8 @@
         & [role="clock"] {
             position: absolute;
             z-index: 1;
+            width: 100%;
+            height: 100%;
 
             & .clock-hand {
                 transform-origin: center center;

@@ -24,8 +24,9 @@ $occurence = $entry->occurences->last();
     <small role="entry-date" class="ghost" {{ Popper::pop($occurence->date->format('d.m.Y')) }}>
         {{ $occurence }}
     </small>
+    <img role="clock" src="{{ asset("media/clockface.svg") }}" />
     <svg role="clock" width="100%" height="100%">
-        <rect class="clock-hand" x="50%" y="0" width="3px" height="50%"
+        <rect class="clock-hand" x="48.35%" y="0" width="5px" height="50%"
             style="rotate: {{ $occurence->rotation }}deg;"
         />
     </svg>
